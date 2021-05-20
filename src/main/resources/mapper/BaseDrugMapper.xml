@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.latticy.mapper.BaseDrugMapper">
+
+    <resultMap id="BaseResultMap" type="com.api.latticy.model.BaseDrugModel">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="num" jdbcType="VARCHAR" property="num"/>
+        <result column="drug_type" jdbcType="VARCHAR" property="type"/>
+        <result column="type_a" jdbcType="VARCHAR" property="typeA"/>
+        <result column="type_b" jdbcType="VARCHAR" property="typeB"/>
+        <result column="drug_name" jdbcType="VARCHAR" property="drugName"/>
+        <result column="norms" jdbcType="VARCHAR" property="norms"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="time"/>
+    </resultMap>
+
+    <!--CONCAT("%",#{q},"%")-->
+    <select id="selectBaseById" resultMap="BaseResultMap">
+        SELECT id, num, drug_type, type_a, type_b, drug_name, norms, create_time
+        FROM base
+        WHERE base.id = #{id}
+    </select>
+</mapper>
