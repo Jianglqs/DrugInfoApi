@@ -13,10 +13,35 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="time"/>
     </resultMap>
 
-    <!--CONCAT("%",#{q},"%")-->
+    <sql id="Base_Column_List">
+        id, num, drug_type, type_a, type_b, drug_name, norms, create_time
+    </sql>
+
     <select id="selectBaseById" resultMap="BaseResultMap">
-        SELECT id, num, drug_type, type_a, type_b, drug_name, norms, create_time
+        SELECT
+        <include refid="Base_Column_List" />
         FROM base
         WHERE base.id = #{id}
+    </select>
+
+    <select id="selectBaseAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM base
+    </select>
+
+    <select id="selectBaseByType" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM base
+        WHERE base.drug_type = #{type}
+    </select>
+
+    <!--CONCAT("%",#{q},"%")-->
+    <select id="selectBaseByDrugName" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM base
+        WHERE base.drug_name LIKE CONCAT("%", #{drugName}, "%")
     </select>
 </mapper>
